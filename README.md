@@ -29,3 +29,6 @@ cd backend
 npm install
 node index.js
 ```
+<img width="886" height="134" alt="image" src="https://github.com/user-attachments/assets/d87a7057-493a-4729-99b9-eefe5edb4f04" />
+<img width="646" height="390" alt="image" src="https://github.com/user-attachments/assets/87cf9888-9f80-4c99-b9ca-361203173cde" />
+

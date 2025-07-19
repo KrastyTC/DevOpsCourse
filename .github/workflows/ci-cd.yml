@@ -15,7 +15,7 @@ jobs:
       MACHINE_TYPE: e2-medium
       DISK_SIZE: 30GB
       IMAGE_FAMILY: ubuntu-2004-lts
-      IMAGE_PROJECT: ubuntu-os-cloud
+      IMAGE_PROJECT: ubuntu-os-pro-cloud
       REPOSITORY: my-app
 
     steps:

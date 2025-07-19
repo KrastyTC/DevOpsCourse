@@ -84,6 +84,11 @@ jobs:
           sudo apt-get install -y docker.io docker-compose
         "
 
+    - name: Debug – list repo files
+      run: |
+        echo "Current directory: $(pwd)"
+        ls -al
+        
     # 📂 Скопировать docker-compose.yml на VM
     - name: Copy docker-compose.yml to VM
       run: |

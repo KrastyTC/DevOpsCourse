@@ -1,18 +1,16 @@
 version: '3.8'
 
-
 services:
   frontend:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
-    ports: ['80:80']
-    depends_on: ['backend']
+    image: us-central1-docker.pkg.dev/rare-study-465720-c1/my-app/frontend:latest
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
 
   backend:
-    build:
-      context: ./backend
-      dockerfile: Dockerfile
-    ports: ['5000:5000']
+    image: us-central1-docker.pkg.dev/rare-study-465720-c1/my-app/backend:latest
+    ports:
+      - "5000:5000"
     environment:
       NODE_ENV: production

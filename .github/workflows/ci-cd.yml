@@ -87,7 +87,7 @@ jobs:
     # 📂 Скопировать docker-compose.yml на VM
     - name: Copy docker-compose.yml to VM
       run: |
-        gcloud compute scp docker-compose.yml $VM_NAME:/home/$(whoami)/docker-compose.yml --zone=$ZONE
+        gcloud compute scp ./docker-compose.yml $VM_NAME:/home/$(whoami)/docker-compose.yml --zone=$ZONE
 
     # 🔥 Перезапуск приложения на VM
     - name: Deploy application on VM

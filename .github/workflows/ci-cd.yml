@@ -14,8 +14,8 @@ jobs:
       VM_NAME: ${{ secrets.GCP_VM_NAME }}
       MACHINE_TYPE: e2-medium
       DISK_SIZE: 30GB
-      IMAGE_FAMILY: ubuntu-2004-lts
-      IMAGE_PROJECT: ubuntu-os-pro-cloud
+      IMAGE_FAMILY: debian-12
+      IMAGE_PROJECT: debian-cloud
       REPOSITORY: my-app
 
     steps:

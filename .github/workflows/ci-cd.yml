@@ -20,24 +20,20 @@ jobs:
       REPOSITORY: my-app
 
     steps:
-    # 📥 Клонируем репозиторий
     - name: Checkout repository
       uses: actions/checkout@v4
 
-    # 🔑 Авторизация в GCP
     - name: Authenticate to GCP
       uses: google-github-actions/auth@v2
       with:
         credentials_json: ${{ secrets.GCP_SA_KEY }}
 
-    # 🌐 Настройка gcloud
     - name: Set up Cloud SDK
       uses: google-github-actions/setup-gcloud@v2
       with:
         project_id: ${{ secrets.GCP_PROJECT }}
         install_components: "beta"
 
-    # 🖥️ Создать VM если её нет
     - name: Create VM if not exists
       run: |
         if ! gcloud compute instances describe $VM_NAME --zone=$ZONE; then
@@ -55,7 +51,6 @@ jobs:
           echo "VM $VM_NAME already exists."
         fi
 
-    # 🌍 Открыть доступ на 80 и 443 порты
     - name: Open firewall for HTTP/HTTPS
       run: |
         gcloud compute firewall-rules create allow-http-https \
@@ -63,7 +58,6 @@ jobs:
           --target-tags http-server,https-server \
           --description="Allow HTTP and HTTPS traffic" || echo "Firewall rule already exists"
 
-    # 🚀 Пуш образов в Artifact Registry
     - name: Configure Docker to use Artifact Registry
       run: |
         gcloud auth configure-docker ${REGION}-docker.pkg.dev
@@ -79,7 +73,6 @@ jobs:
         docker push $FRONTEND_IMAGE
         docker push $BACKEND_IMAGE
 
-    # 📦 Установить Docker и Docker Compose на VM
     - name: Install Docker & Compose on VM
       run: |
         gcloud compute ssh $VM_NAME --zone=$ZONE --command "
@@ -92,7 +85,6 @@ jobs:
         gcloud auth configure-docker ${REGION}-docker.pkg.dev
         "
 
-    # 📂 Скопировать docker-compose.yaml на VM
     - name: Copy docker-compose.yaml to VM
       run: |
         gcloud compute scp $GITHUB_WORKSPACE/docker-compose.yaml $VM_NAME:/home/$(whoami)/docker-compose.yaml --zone=$ZONE
@@ -114,7 +106,6 @@ jobs:
         "
 
 
-    # 📴 Выключить VM после деплоя
     - name: Stop VM
       run: |
         gcloud compute instances stop $VM_NAME --zone=$ZONE

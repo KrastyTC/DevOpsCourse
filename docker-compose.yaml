@@ -7,6 +7,7 @@ services:
       - "80:80"
     depends_on:
       - backend
+    restart: always
 
   backend:
     image: us-central1-docker.pkg.dev/rare-study-465720-c1/my-app/backend:latest
@@ -14,3 +15,4 @@ services:
       - "5000:5000"
     environment:
       NODE_ENV: production
+    restart: always
